@@ -1,13 +1,10 @@
 import java.util.Random;
 import java.util.Scanner;
-
 public class Game {
+    Player player;
     public Game() {
-        Player player = new Player("Alex", 1000, 30, 20);
-        Skeleton skeleton = new Skeleton("skeleton", 1200, 10, 5);
-        Goblin goblin = new Goblin("goblin", 1500, 20, 50);
-
-
+        Player player = new Player("Alex", 1000, 30, 50);
+        this.player = player;
         System.out.println("Greetings! Your stats are:");
         System.out.println("HP: " + player.hp + ", EXP: " + player.experience);
         System.out.println("""
@@ -45,18 +42,19 @@ public class Game {
 
         }
     }
-
-    private static void makeChoice(String option) {
+    public void makeChoice(String option) {
         switch (option) {
             case "1":
                 Random random = new Random();
                 int num = random.nextInt(100);
                 if (num <= 50) {
                     System.out.println("You are starting to fight with a skeleton!");
-                    //fight logic
+                    Skeleton skeleton = new Skeleton("skeleton", 1200, 10, 5);
+                    Fight fight = new Fight(this.player, skeleton);
                 } else {
                     System.out.println("You are starting to fight with a goblin!");
-                    //fight logic
+                    Goblin goblin = new Goblin("goblin", 1500, 20, 50);
+                    Fight fight = new Fight(this.player, goblin);
                 }
                 break;
             case "2":

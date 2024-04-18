@@ -1,4 +1,4 @@
-public class Skeleton extends Character {
+public class Skeleton extends Monster {
 
 
     public Skeleton (String name, int hp, int agility, int strength) {

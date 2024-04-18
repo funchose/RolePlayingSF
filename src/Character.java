@@ -21,7 +21,6 @@ public abstract class Character {
                 return 0;
             }
     }
-
     public void beingUnderAttack(int damage) {
         this.hp -= damage;
     }
