@@ -21,7 +21,8 @@ public class Fight extends Thread {
         else {
             System.out.println(monster.name + " is defeated!");
             player.experience += experienceWon;
-            player.gold += experienceWon / 100;
+            player.gold += experienceWon / 10;
+            player.levelUp();
             interrupt();
         }
     }

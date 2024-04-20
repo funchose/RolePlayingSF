@@ -43,7 +43,6 @@ public class Game {
                 case "3":
                     player.printStats();
                     break;
-
             }
 
         }
@@ -69,12 +68,45 @@ public class Game {
                     }
                     break;
                 case "2":
-                    System.out.println("The merchant is not yet at work!");
-                    //Trade logics
+                    System.out.println("What would you like to buy?");
+                    System.out.println("1. Small potion (Price: " + Merchant.smallPotionPrice + ", HP restored: " + Merchant.smallPotionHP + ")");
+                    System.out.println("2. Medium potion (Price: " + Merchant.mediumPotionPrice + ", HP restored: " + Merchant.mediumPotionHP + ")");
+                    System.out.println("3. Large potion (Price: " + Merchant.largePotionPrice + ", HP restored: " + Merchant.largePotionHP + ")");
+                    Scanner scanner = new Scanner(System.in);
+                    String tradeOption = scanner.nextLine();
+                    switch (tradeOption) {
+                        case "1":
+                            if (player.gold >= Merchant.smallPotionPrice) {
+                                player.gold -= Merchant.smallPotionPrice;
+                                player.hp += Merchant.smallPotionHP;
+                            }
+                            else {
+                                System.out.println("You don't have enough gold!");
+                            }
+                            break;
+                        case "2":
+                            if (player.gold >= Merchant.mediumPotionPrice) {
+                                player.gold -= Merchant.mediumPotionPrice;
+                                player.hp += Merchant.mediumPotionHP;
+                            }
+                            else {
+                                System.out.println("You don't have enough gold!");
+                            }
+                            break;
+                        case "3":
+                            if (player.gold >= Merchant.largePotionPrice) {
+                                player.gold -= Merchant.largePotionPrice;
+                                player.hp += Merchant.largePotionHP;
+                            }
+                            else {
+                                System.out.println("You don't have enough gold!");
+                            }
+                            break;
+                    }
                     break;
-                case "3":
-                    System.out.println("See you later!");
-                    System.exit(0);
+                          case "4":
+                            System.out.println("See you later, " + player.name + "!");
+                            System.exit(0);
 
             }
         }
