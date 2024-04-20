@@ -10,4 +10,8 @@ public class Player extends Character{
         experience = 0;
         gold = 0;
     }
+    public void printStats() {
+        System.out.println("Your stats are:");
+        System.out.println("HP: " + this.hp + ", EXP: " + this.experience);
+    }
 }
