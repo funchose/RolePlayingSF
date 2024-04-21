@@ -13,7 +13,7 @@ public class Player extends Character{
     }
     public void printStats() {
         System.out.println(this.name + ", your stats are:");
-        System.out.println("HP: " + this.hp + ", EXP: " + this.experience + ", Gold: " + this.gold);
+        System.out.println("HP: " + this.hp + ", EXP: " + this.experience + ", Level: " + this.level + ", Gold: " + this.gold);
     }
     public void levelUp() {
         /*
