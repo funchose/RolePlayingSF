@@ -1,7 +1,9 @@
 import java.util.Random;
 import java.util.Scanner;
+
 public class Game {
     Player player;
+
     public Game() {
         System.out.println("Welcome to the Role Playing Game!\nPlease, enter your name:");
         Scanner scanner = new Scanner(System.in);
@@ -9,34 +11,24 @@ public class Game {
         Player player = new Player(name, 1000, 30, 50);
         this.player = player;
         player.printStats();
-        System.out.println("""
-        What would you like to do? Please, enter a number of an option.
-        Your options are:
-        1. Go the deep forest
-        2. Go to the merchant
-        3. View stats
-        4. Go to the exit""");
-
+        printOptions();
         String option = scanner.nextLine();
         makeChoice(option);
         while (true) {
             System.out.println("""
-            Choose your next move:
-            1. Continue fight/trade
-            2. Go back to the town
-            3. View stats""");
+                    Choose your next move:
+                    1. Continue fight/trade
+                    2. Go back to the town
+                    3. View stats""");
             String option2 = scanner.nextLine();
             switch (option2) {
                 case "1":
-                    makeChoice(option);
-                    break;
+                    if (option.equals("1") || option.equals("2")) {
+                        makeChoice(option);
+                        break;
+                    }
                 case "2":
-                    System.out.println("""
-                    Where would you like to go? Please, enter a number of an option.
-                    Your options are:
-                    1. To the deep forest
-                    2. To the merchant
-                    3. To the exit""");
+                    printOptions();
                     option = scanner.nextLine();
                     makeChoice(option);
                     break;
@@ -44,10 +36,20 @@ public class Game {
                     player.printStats();
                     break;
             }
-
         }
     }
+
+    private static void printOptions() {
+        System.out.println("""
+                What would you like to do? Please, enter a number of an option.
+                Your options are:
+                1. Go the deep forest
+                2. Go to the merchant
+                0. Go to the exit""");
+    }
+
     public void makeChoice(String option) {
+        Scanner scanner = new Scanner(System.in);
         try {
             switch (option) {
                 case "1":
@@ -72,45 +74,39 @@ public class Game {
                     System.out.println("1. Small potion (Price: " + Merchant.smallPotionPrice + ", HP restored: " + Merchant.smallPotionHP + ")");
                     System.out.println("2. Medium potion (Price: " + Merchant.mediumPotionPrice + ", HP restored: " + Merchant.mediumPotionHP + ")");
                     System.out.println("3. Large potion (Price: " + Merchant.largePotionPrice + ", HP restored: " + Merchant.largePotionHP + ")");
-                    Scanner scanner = new Scanner(System.in);
                     String tradeOption = scanner.nextLine();
                     switch (tradeOption) {
                         case "1":
                             if (player.gold >= Merchant.smallPotionPrice) {
                                 player.gold -= Merchant.smallPotionPrice;
                                 player.hp += Merchant.smallPotionHP;
-                            }
-                            else {
-                                System.out.println("You don't have enough gold!");
+                            } else {
+                                System.out.println("You don't have enough gold!\nGo fight with monsters and earn some more!");
                             }
                             break;
                         case "2":
                             if (player.gold >= Merchant.mediumPotionPrice) {
                                 player.gold -= Merchant.mediumPotionPrice;
                                 player.hp += Merchant.mediumPotionHP;
-                            }
-                            else {
-                                System.out.println("You don't have enough gold!");
+                            } else {
+                                System.out.println("You don't have enough gold!\nGo fight with monsters and earn some more!");
                             }
                             break;
                         case "3":
                             if (player.gold >= Merchant.largePotionPrice) {
                                 player.gold -= Merchant.largePotionPrice;
                                 player.hp += Merchant.largePotionHP;
-                            }
-                            else {
-                                System.out.println("You don't have enough gold!");
+                            } else {
+                                System.out.println("You don't have enough gold!\nGo fight with monsters and earn some more!");
                             }
                             break;
                     }
                     break;
-                          case "4":
-                            System.out.println("See you later, " + player.name + "!");
-                            System.exit(0);
-
+                case "0":
+                    System.out.println("See you later, " + player.name + "!");
+                    System.exit(0);
             }
-        }
-        catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
